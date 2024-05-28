@@ -9,10 +9,7 @@ const dotenv = require('dotenv');
 
 
 dotenv.config();
-console.log('i am here')
-router.get('/see',(req,res)=>{
-    res.status(200).json({msg:"working fine"})
-})
+
 //Post api/auth/register    @route
 //Register user             @desc
 //public                    @access
