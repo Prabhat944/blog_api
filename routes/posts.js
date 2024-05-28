@@ -84,7 +84,6 @@ router.delete('/:id',auth,async(req,res)=>{
                 msg:"User not authorized"
             });
         }
-        console
         await post.deleteOne();
         res.json({msg:"Post removed successfully"});
     }catch(err){
@@ -92,6 +91,36 @@ router.delete('/:id',auth,async(req,res)=>{
         res.status(500).json({msg:"Something went wrong"});
     }
 });
+
+//PUT api/posts/:id           @route
+//Update a post               @desc
+//private                     @access
+router.put('/:id',auth,[
+    check('title','Title is required').not().isEmpty(),
+    check('content', 'Content is required').not().isEmpty()]
+    ,async(req,res)=>{
+    try{
+        const post = await Post.findById(req.params.id);
+        if(!post){
+            return res.status(404).json({msg:"Post not found"});
+        }
+
+        if(post.author.toString() !== req.user.id){
+            return res.status(401).json({
+                msg:"User not authorized"
+            });
+        }
+
+        post.title = req.body.title;
+        post.content = req.body.content;
+        await post.save();
+        res.json({msg:"Post updated successfully",post});
+    }catch(err){
+        console.error(err.message);
+        res.status(500).json({msg:"Something went wrong"});
+    }
+});
+
 
 //PUT api/posts/like/:id         @route
 //Like a post                    @desc

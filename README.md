@@ -36,6 +36,7 @@ Start the server:  npm run start
 API Endpoints
 
 //////////////////////////      Auth     ////////////////////////////////////
+
 Register User:  POST /api/auth/register
                 {
                   "name": "prabhat kumar",
@@ -93,7 +94,12 @@ Unlike Post:     PUT /api/posts/unlike/:id
                       }
 
 
+
+
+
+
 /////////////////////////////////////       Comments      ///////////////////////////////////
+
 Add Comment:     POST /api/posts/:postId/comments
                headers:{
                           "x-auth-token": "your_jwt_token"
@@ -106,6 +112,8 @@ Delete Comment:   DELETE /api/posts/:postId/comments/:commentId
                   headers:{
                         "x-auth-token": "your_jwt_token"
                       }
+
+
 
 
 
